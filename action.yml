@@ -1,4 +1,4 @@
-name: 'gruploader release attachment'
+name: 'gruploader release'
 description: 'Upload the specified file or build file to the releases attachment'
 author: 'zhiqiang <zhiqiang2033@gmail.com>'
 

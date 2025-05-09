@@ -2,7 +2,7 @@
 
 set -eux
 
-# source /sh/setup-gruploader.sh
+source /sh/setup-gruploader.sh
 
 function uploader_golang() {
     source /sh/setup-golang.sh

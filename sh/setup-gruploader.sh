@@ -34,18 +34,6 @@ check_empty "INPUT_GRUPLOADER_CLOUD" "${INPUT_GRUPLOADER_CLOUD}"
 check_empty "INPUT_OVERWRITE" "${INPUT_OVERWRITE}"
 check_empty "INPUT_RETRY" "${INPUT_RETRY}"
 
-TEMP="$(mktemp -d)"
-trap 'rm -rf $TEMP' EXIT INT
-
-wget --progress=dot:mega https://github.com/pkg6/gruploader/releases/download/${INPUT_GRUPLOADER_VERSION}/gruploader_linux_amd64.tar.gz -O "$TEMP/gruploader-linux.tar.gz"
-(
-   cd "$TEMP" || exit 1
-   mkdir -p /usr/local/gruploader
-   tar -zxf gruploader-linux.tar.gz -C /usr/local/gruploader
-)
-
-export PATH=/usr/local/gruploader:$PATH
-
 
 gruploader --help
 
@@ -55,6 +43,4 @@ export EXTRA_FILES=${INPUT_EXTRA_FILES}
 export MAIN_GO=${INPUT_MAINGO}
 export BIN_NAME=${INPUT_BIN_NAME}
 export GRUPLOADER_COMMAND="gruploader -cloud ${INPUT_GRUPLOADER_CLOUD} --repo=${INPUT_REPOSITORY} --tag=${INPUT_TAG} --overwrite=${INPUT_OVERWRITE} --retry=${INPUT_RETRY}"
-
-
 

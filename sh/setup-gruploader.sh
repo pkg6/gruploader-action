@@ -44,8 +44,7 @@ wget --progress=dot:mega https://go.dev/dl/go1.23.9.linux-$(dpkg --print-archite
     export GO_HOME=$TEMP/go
     export GOPATH=$TEMP/gb
     export PATH=${GOPATH}/bin:${GO_HOME}/bin/:$PATH
-    go env -w GO111MODULE=on
-    go env -w GOPROXY=https://goproxy.cn,direct
+    go version
     go install github.com/pkg6/gruploader-action/gruploader@latest
     mv $TEMP/gb/bin/gruploader /usr/local/bin/gruploader
 )

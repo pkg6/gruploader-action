@@ -1,4 +1,4 @@
-#!/bin/bash -eux
+# !/bin/bash -eux
 
 INPUT_GRUPLOADER_VERSION="${INPUT_GRUPLOADER_VERSION:-"v0.1.0"}"
 
@@ -35,6 +35,23 @@ check_empty "INPUT_OVERWRITE" "${INPUT_OVERWRITE}"
 check_empty "INPUT_RETRY" "${INPUT_RETRY}"
 
 
+TEMP="$(mktemp -d)"
+trap 'rm -rf $TEMP' EXIT INT
+wget --progress=dot:mega https://go.dev/dl/go1.23.9.linux-$(dpkg --print-architecture).tar.gz -O "$TEMP/go-linux.tar.gz"
+(
+    cd "$TEMP" || exit 1
+    tar -zxf go-linux.tar.gz
+    export GO_HOME=$TEMP/go
+    export GOPATH=$TEMP/gb
+    export PATH=${GOPATH}/bin:${GO_HOME}/bin/:$PATH
+    go env -w GO111MODULE=on
+    go env -w GOPROXY=https://goproxy.cn,direct
+    go install github.com/pkg6/gruploader-action/gruploader@latest
+    mv $TEMP/gb/bin/gruploader /usr/local/bin/gruploader
+)
+
+chmod +x /usr/local/bin/gruploader
+
 gruploader --help
 
 export GITHUB_TOKEN=${INPUT_GITHUB_TOKEN}
@@ -43,4 +60,3 @@ export EXTRA_FILES=${INPUT_EXTRA_FILES}
 export MAIN_GO=${INPUT_MAINGO}
 export BIN_NAME=${INPUT_BIN_NAME}
 export GRUPLOADER_COMMAND="gruploader -cloud ${INPUT_GRUPLOADER_CLOUD} --repo=${INPUT_REPOSITORY} --tag=${INPUT_TAG} --overwrite=${INPUT_OVERWRITE} --retry=${INPUT_RETRY}"
-

@@ -11,7 +11,7 @@ Usage of ./gruploader:
   -overwrite
         Overwrite release asset if it's already exist.
   -repo string
-        repo, e.g., 'pkg6/gruploader'.
+        repo, e.g., 'pkg6/gruploader-action'.
   -retry uint
         How many times to retry if error occur. (default 2)
   -tag string

@@ -16,7 +16,7 @@ var (
 func init() {
 	flag.StringVar(&args.Cloud, "cloud", "github", "Which cloud do you use for git?")
 	flag.StringVar(&args.File, "f", "", "File path to upload.")
-	flag.StringVar(&args.Repo, "repo", "", "repo, e.g., 'pkg6/gruploader'.")
+	flag.StringVar(&args.Repo, "repo", "", "repo, e.g., 'pkg6/gruploader-action'.")
 	flag.StringVar(&args.Tag, "tag", "", "Git tag to identify a  Release in repo.")
 	flag.BoolVar(&args.Overwrite, "overwrite", false, "Overwrite release asset if it's already exist.")
 	flag.UintVar(&args.Retry, "retry", 2, "How many times to retry if error occur.")

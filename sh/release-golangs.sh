@@ -1,6 +1,7 @@
 #!/bin/bash
 
 
+git config --global --add safe.directory /github/workspace
 TAG_VERSION="${TAG_VERSION:-$(git describe --tags --always)}"
 BIN_NAME="${BIN_NAME:-$(basename $(pwd))}"
 EXTRA_FILES="${EXTRA_FILES:-""}"

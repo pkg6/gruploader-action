@@ -4,7 +4,6 @@ ADD gruploader /app
 
 
 RUN cd /app && \
-    go env -w GOPROXY=https://goproxy.cn,direct && \
     go build -v -trimpath -ldflags "-s -w -buildid=" -o gruploader && \
     ./gruploader --help
 

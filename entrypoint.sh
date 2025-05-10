@@ -50,7 +50,7 @@ case "${INPUT_ACTION}" in
         uploader_files
         ;;
     "node-gh-page")
-        node-gh-page
+        node_gh_page
         ;;
     "test")
         uploader_test

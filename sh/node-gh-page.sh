@@ -50,6 +50,6 @@ git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 git remote add origin "$INPUT_ORIGIN_URL" || { echo "git remote add origin failed"; exit 1; }
 git branch -M gh-pages  || { echo "git branch -M gh-pages failed"; exit 1; }
 git add -A || { echo "git add -A failed"; exit 1; }
-git commit -m "$(date "+Publish gh pages branch %Y-%m-%d %H:%M:%S")" || { echo "git commit failed"; exit 1; }
+git commit -m "$(date "+gruploader-action push %Y-%m-%d %H:%M:%S")" || { echo "git commit failed"; exit 1; }
 git config -l
 git push -u origin gh-pages --force || { echo  "Git push failed"; exit 1; } 

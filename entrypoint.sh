@@ -26,7 +26,7 @@ function uploader_files() {
 
 function node_gh_page() {
     source /sh/setup-node.sh
-    source /sh/gh-page.sh
+    source /sh/node-gh-page.sh
 }
 
 function uploader_test() {

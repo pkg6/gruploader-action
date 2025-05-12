@@ -57,6 +57,19 @@ jobs:
           extra_files: LICENSE  README.md 
 ~~~
 
+| Variable      | Default             | Example               | Description                                           |
+| ------------- | ------------------- | --------------------- | ----------------------------------------------------- |
+| `extra_files` | `""`                | `"README.md LICENSE"` | Additional files to include in the compressed package |
+| `bin_name`    | `basename $(pwd)`   | `mycli`               | Name of the built binary                              |
+| `goos`        | `go env GOHOSTOS`   | `linux`, `windows`    | Target OS for Go build                                |
+| `goarch`      | `go env GOHOSTARCH` | `amd64`, `arm64`      | Target architecture                                   |
+| `build_flags` | `""`                | `-trimpath`           | Extra build flags for `go build`                      |
+| `ldflags`     | `""`                | `-s -w`               | Linker flags for `go build`                           |
+| `goamd64`     | `""`                | `v3`                  | `GOAMD64` variant (only for `amd64`)                  |
+| `goarm`       | `""`                | `7`                   | ARM version (only for `arm`)                          |
+| `gomips`      | `""`                | `softfloat`           | MIPS setting (only for `mips`, `mipsle`, etc.)        |
+
+
 ## GitHub action (golangs upload)
 
 ~~~
@@ -84,6 +97,7 @@ jobs:
           README.md
           LICENSE
 ~~~
+
 
 ## GitHub action (node upload)
 
@@ -113,3 +127,41 @@ jobs:
           LICENSE
 ~~~
 
+| Variable            | Default Value     | Example               | Description                                              |
+| ------------------- | ----------------- | --------------------- | -------------------------------------------------------- |
+| `extra_files`       | `""` (empty)      | `"README.md LICENSE"` | Extra files or directories to copy into the build output |
+| `bin_name`          | `"web"`           | `"myapp"`             | Output archive name prefix (e.g., `myapp.tar.gz`)        |
+| `npm_install_pkg`   | `"npm install"`   | `"npm ci"`            | Command to install dependencies                          |
+| `npm_build_command` | `"npm run build"` | `"vite build"`        | Command to build the project                             |
+| `npm_build_dist`    | `"dist"`          | `"build"`             | Directory containing the build output                    |
+
+## GitHub action (node-gh-page)
+
+~~~
+# .github/workflows/gruploader.yaml
+on:
+  workflow_dispatch:
+
+permissions:
+    contents: write
+    packages: write
+
+jobs:
+  release-linux-amd64:
+    name: release linux/amd64
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: pkg6/gruploader-action@develop
+      with:
+        github_token: ${{ secrets.REPO_TOKEN }}
+        action: node-gh-page
+~~~
+
+| 变量名              | 默认值                      | 说明                                                         |
+| ------------------- | --------------------------- | ------------------------------------------------------------ |
+| `cname_domain`      | `""`                        | Custom CNAME domain name (CNAME file for GitHub Pages)       |
+| `origin_url`        | `""`                        | Git repository address (this value is used first, followed by `git config`, and then GitHub environment variable derivation) |
+| `npm_install_pkg`   | `npm ci --legacy-peer-deps` | Install dependency commands                                  |
+| `npm_build_command` | `npm run build`             | Build Commands                                               |
+| `npm_build_dist`    | `dist`                      | Build product output directory                               |

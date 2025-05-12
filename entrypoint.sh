@@ -2,24 +2,31 @@
 
 set -eux
 
-source /sh/setup-gruploader.sh
-
 function uploader_golang() {
+    source /sh/setup-gruploader.sh
     source /sh/setup-golang.sh
     source /sh/release-golang.sh
 }
 function uploader_golangs() {
+    source /sh/setup-gruploader.sh
     source /sh/setup-golang.sh
     source /sh/release-golangs.sh
 }
 
 function uploader_node() {
-  source /sh/setup-node.sh
-   source /sh/release-node.sh
+    source /sh/setup-gruploader.sh
+    source /sh/setup-node.sh
+    source /sh/release-node.sh
 }
 
 function uploader_files() {
-   source /sh/release-extra-files.sh
+    source /sh/setup-gruploader.sh
+    source /sh/release-extra-files.sh
+}
+
+function node_gh_page() {
+    source /sh/setup-node.sh
+    source /sh/node-gh-page.sh
 }
 
 function uploader_test() {
@@ -41,6 +48,9 @@ case "${INPUT_ACTION}" in
         ;;
     "files")
         uploader_files
+        ;;
+    "node-gh-page")
+        node_gh_page
         ;;
     "test")
         uploader_test

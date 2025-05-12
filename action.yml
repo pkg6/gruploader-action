@@ -7,6 +7,14 @@ inputs:
     description: 'GITHUB_TOKEN for uploading releases to Github asserts.'
     required: true
     default: ''
+  origin_url:
+    description: 'Git repository address'
+    required: false
+    default: ''
+  cname_domain:
+    description: 'github page deployment domain name'
+    required: false
+    default: ''
   action:
     description: 'Which language do you need to set for compilation? The default is Golang'
     required: false
@@ -105,6 +113,8 @@ runs:
   image: 'Dockerfile'
   args:
     - ${{ inputs.github_token }}
+    - ${{ inputs.origin_url }}
+    - ${{ inputs.cname_domain }}
     - ${{ inputs.gruploader_version }}
     - ${{ inputs.gruploader_cloud }}
     - ${{ inputs.overwrite }}

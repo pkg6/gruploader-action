@@ -47,10 +47,6 @@ cd ${INPUT_NPM_BUILD_DIST} || { echo "cd ${INPUT_NPM_BUILD_DIST} failed"; exit 1
 
 echo "Step 4: Preparing to publish..."
 
-echo machine github.com login $GITHUB_ACTOR password $INPUT_GITHUB_TOKEN > ~/.netrc
-
-chmod 600 ~/.netrc
-
 git init
 
 git config user.name "github-actions[bot]"

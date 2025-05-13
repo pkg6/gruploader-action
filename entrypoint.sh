@@ -26,6 +26,7 @@ function uploader_files() {
 
 function node_gh_page() {
     source /sh/setup-node.sh
+    source /sh/setup-gh-account.sh
     source /sh/node-gh-page.sh
 }
 

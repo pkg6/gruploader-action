@@ -1,7 +1,7 @@
 ## Golang Install
 
 ~~~
-go install github.com/pkg6/gruploader-action/gruploader@main
+go install github.com/pkg6/gruploader-action/gruploader@latest
 ~~~
 
 ## Usage

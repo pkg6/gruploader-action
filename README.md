@@ -1,4 +1,3 @@
-
 ## GitHub action (file upload)
 
 ~~~
@@ -40,8 +39,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        goos: [linux, windows]
-        goarch: [arm64]
+        goos: [linux,windows,darwin]
+        goarch: [arm64,amd64]
         exclude:
           - goarch: arm64
             goos: windows
@@ -152,7 +151,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - uses: pkg6/gruploader-action@develop
+    - uses: pkg6/gruploader-action@main
       with:
         github_token: ${{ secrets.REPO_TOKEN }}
         action: node-gh-page

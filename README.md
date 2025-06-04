@@ -2,7 +2,8 @@
 ## GitHub action (file upload)
 
 ~~~
-# .github/workflows/gruploader.yaml
+name: upload file extra
+
 on:
   release:
     types: [created]
@@ -29,7 +30,7 @@ jobs:
 ## GitHub action (golang upload)
 
 ~~~
-name: build
+name: build golang
 
 on:
   release:
@@ -73,7 +74,8 @@ jobs:
 ## GitHub action (golangs upload)
 
 ~~~
-# .github/workflows/gruploader.yaml
+name: build golangs
+
 on:
   release:
     types: [created]
@@ -102,7 +104,8 @@ jobs:
 ## GitHub action (node upload)
 
 ~~~
-# .github/workflows/gruploader.yaml
+name: build node
+
 on:
   release:
     types: [created]
@@ -138,7 +141,8 @@ jobs:
 ## GitHub action (node-gh-page)
 
 ~~~
-# .github/workflows/gruploader.yaml
+name: build node-gh-page
+
 on:
   workflow_dispatch:
 

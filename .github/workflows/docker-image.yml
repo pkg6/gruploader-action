@@ -3,24 +3,28 @@ name: docker-image
 on:
   push:
     tags:
-      - 'v*'
+      - 'v*' 
+
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      
-      - name: Extract tag name
+
+      - name: Extract tag name without "v"
         id: tag
-        run: echo "TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+        run: |
+          RAW_TAG="${GITHUB_REF##refs/tags/}"
+          CLEAN_TAG="${RAW_TAG#v}"
+          echo "tag=$CLEAN_TAG" >> "$GITHUB_OUTPUT"
 
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GH_TOKEN }}
+          password: ${{ secrets.GH_TOKEN }} 
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -35,5 +39,5 @@ jobs:
           push: true
           platforms: linux/amd64,linux/arm64
           tags: |
-            ghcr.io/pkg6/gruploader:${{ steps.tag.outputs.TAG }}
+            ghcr.io/pkg6/gruploader:${{ steps.tag.outputs.tag }}
             ghcr.io/pkg6/gruploader:latest

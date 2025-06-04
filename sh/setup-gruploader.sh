@@ -34,22 +34,20 @@ check_empty "INPUT_GRUPLOADER_CLOUD" "${INPUT_GRUPLOADER_CLOUD}"
 check_empty "INPUT_OVERWRITE" "${INPUT_OVERWRITE}"
 check_empty "INPUT_RETRY" "${INPUT_RETRY}"
 
-
-TEMP="$(mktemp -d)"
-trap 'rm -rf $TEMP' EXIT INT
-wget --progress=dot:mega https://go.dev/dl/go1.23.9.linux-$(dpkg --print-architecture).tar.gz -O "$TEMP/go-linux.tar.gz"
-(
-    cd "$TEMP" || exit 1
-    tar -zxf go-linux.tar.gz
-    export GO_HOME=$TEMP/go
-    export GOPATH=$TEMP/gb
-    export PATH=${GOPATH}/bin:${GO_HOME}/bin/:$PATH
-    go version
-    go install github.com/pkg6/gruploader-action/gruploader@latest
-    mv $TEMP/gb/bin/gruploader /usr/local/bin/gruploader
-)
-
-chmod +x /usr/local/bin/gruploader
+# TEMP="$(mktemp -d)"
+# trap 'rm -rf $TEMP' EXIT INT
+# wget --progress=dot:mega https://go.dev/dl/go1.23.9.linux-$(dpkg --print-architecture).tar.gz -O "$TEMP/go-linux.tar.gz"
+# (
+#     cd "$TEMP" || exit 1
+#     tar -zxf go-linux.tar.gz
+#     export GO_HOME=$TEMP/go
+#     export GOPATH=$TEMP/gb
+#     export PATH=${GOPATH}/bin:${GO_HOME}/bin/:$PATH
+#     go version
+#     go install github.com/pkg6/gruploader-action/gruploader@latest
+#     mv $TEMP/gb/bin/gruploader /usr/local/bin/gruploader
+# )
+# chmod +x /usr/local/bin/gruploader
 
 gruploader --help
 

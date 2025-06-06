@@ -1,4 +1,4 @@
-FROM ghcr.io/pkg6/gruploader:0.3.1
+FROM ghcr.io/pkg6/gruploader:latest
 
 COPY sh/*.sh /sh/
 RUN find /sh/ -type f -name "*.sh" -exec chmod +x {} \;

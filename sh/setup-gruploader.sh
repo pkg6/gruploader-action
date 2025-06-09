@@ -44,7 +44,7 @@ check_empty "INPUT_RETRY" "${INPUT_RETRY}"
 #     export GOPATH=$TEMP/gb
 #     export PATH=${GOPATH}/bin:${GO_HOME}/bin/:$PATH
 #     go version
-#     go install github.com/pkg6/gruploader-action/gruploader@latest
+#     go install github.com/pkg6/gruploader@latest
 #     mv $TEMP/gb/bin/gruploader /usr/local/bin/gruploader
 # )
 # chmod +x /usr/local/bin/gruploader
